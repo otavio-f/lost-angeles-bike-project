@@ -1,0 +1,2 @@
+C:\Users\otavi\Downloads\LA_Metro_BikeSharing_CLEANED_2016quater3-2021q3.csv
+C:\Users\otavi\Downloads\stations.csv
