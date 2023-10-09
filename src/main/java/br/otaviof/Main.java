@@ -35,8 +35,8 @@ public class Main {
             ConfigReader conf = new ConfigReader("/config.txt");
             String[] lines = conf.getLines();
             final String target = "LAMetroTrips.csv";
-            //new First(lines[0], lines[1]).transform(target);
-            //new Second(target, lines[1]).transform("LAMetroTrips_F1.csv");
+            new First(lines[0], lines[1]).transform(target);
+            new Second(target, lines[1]).transform("LAMetroTrips_F1.csv");
             new Third(target).transform("LAMetroTrips_F2.csv");
             orderBy(target, "station_name");
             orderBy(target, "duration");

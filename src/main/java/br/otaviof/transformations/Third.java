@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import static br.otaviof.transformations.Util.filterColumn;
 
 public class Third implements Transformation {
-    private TabulatedDataSource source;
+    private final TabulatedDataSource source;
 
     public Third(String source) {
         this.source = new TabulatedDataSource(source, ',');
