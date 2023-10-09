@@ -5,6 +5,9 @@ import br.otaviof.data.TabulatedDataSource;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+/***
+ * First item, replaces the station id with its name
+ */
 public class First implements Transformation {
     private final TabulatedDataSource bikeDataSource;
     private final TabulatedDataSource stationDataSource;

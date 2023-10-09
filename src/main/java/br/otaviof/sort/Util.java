@@ -53,7 +53,6 @@ public class Util {
         int result = first;
         for (int i=first+1; i<last; i++) {
             if (isBigger(arr, i, result))
-            // if (arr[i].compareTo(arr[result]) > 0)
                 result = i;
         }
         return result;

@@ -25,4 +25,9 @@ public class Util {
         }
         return result;
     }
+
+    public static void reverseArray(Object[] arr) {
+        for (int i=0; i<arr.length/2; i++)
+            br.otaviof.sort.Util.swap(arr, i, arr.length-1-i);
+    }
 }

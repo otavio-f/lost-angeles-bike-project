@@ -87,6 +87,17 @@ public class TabulatedDataSource {
     }
 
     /***
+     * Reorders the elements in the column according to a order array
+     * @param column the column to be reordered
+     * @param newOrder an array of positions
+     * @param <T> a type
+     */
+    private <T> void reorderColumn(T[] column, int[] newOrder) {
+        for (int i=0; i<column.length; i++)
+            Util.swap(column, newOrder[i], i);
+    }
+
+    /***
      * Get data from a single column
      * @param name the name of the column
      * @return Each row of the specified column, or an empty array if the column could not be found by the name specified
@@ -102,6 +113,19 @@ public class TabulatedDataSource {
             result[i] = fetchColumn(reader, index);
         }
         reader.close();
+        return result;
+    }
+
+    /***
+     * Get data from a single column in a specific order
+     * @param name the name of the column
+     * @param order the index of each row element
+     * @return Each row of the specified column reordered or an empty array if the column could not be found by the name specified
+     * @throws IOException If the file cannot be read
+     */
+    public String[] getColumn(String name, int[] order) throws IOException {
+        String[] result = getColumn(name);
+        reorderColumn(result, order);
         return result;
     }
 
@@ -131,7 +155,11 @@ public class TabulatedDataSource {
             result[i] = parseDate(dates[i]);
         return result;
     }
-
+    public LocalDateTime[] getDateColumn(String name, int[] order) throws IOException {
+        LocalDateTime[] result = getDateColumn(name);
+        reorderColumn(result, order);
+        return result;
+    }
 
     private static final Pattern INT_REGEX = Pattern.compile(".*?(\\d+).*", Pattern.CASE_INSENSITIVE);
     private Integer parseInteger(String text) {
@@ -143,7 +171,6 @@ public class TabulatedDataSource {
 
     public Integer[] getIntColumn(String name) throws IOException {
         // Colunas de inteiros possuem caracteres soltos
-        // TODO: espancamento, sova, pisa, ou seja, regex
         String[] values = getColumn(name);
         Integer[] result = new Integer[this.lineCount];
         for (int i=0; i<this.lineCount; i++)
@@ -151,18 +178,10 @@ public class TabulatedDataSource {
         return result;
     }
 
-    /***
-     * Get data from a single column in a specific order
-     * @param name the name of the column
-     * @param newOrder the index of each row element
-     * @return Each row of the specified column reordered or an empty array if the column could not be found by the name specified
-     * @throws IOException If the file cannot be read
-     */
-    public String[] getColumn(String name, int[] newOrder) throws IOException {
-        String[] column = getColumn(name);
-        for (int i=0; i<column.length; i++)
-            Util.swap(column, newOrder[i], i);
-        return column;
+    public Integer[] getIntColumn(String name, int[] order) throws IOException {
+        Integer[] result = getIntColumn(name);
+        reorderColumn(result, order);
+        return result;
     }
 
     private String fetchLine(int i) throws IOException {

@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 
 import static br.otaviof.transformations.Util.filterColumn;
 
+/***
+ * Third transformation, filters only with duration bigger than average
+ */
 public class Third implements Transformation {
     private final TabulatedDataSource source;
 
@@ -23,7 +26,7 @@ public class Third implements Transformation {
 
     @Override
     public void transform(String output) throws IOException {
-        Logger logger = Logger.getLogger("FirstTransformation");
+        Logger logger = Logger.getLogger("ThirdTransformation");
         logger.info("Fetching data from csv.");
         Integer[] durations = source.getIntColumn("duration");
         double avg = getAverage(durations);
@@ -62,6 +65,6 @@ public class Third implements Transformation {
         this.source.writeColumn(output, "plan_duration", plan_durations);
         this.source.writeColumn(output, "passholder_type", passholder_types);
         this.source.writeColumn(output, "start_station", start_stations);
-        logger.info("Second transform finished.");
+        logger.info("Third transform finished.");
     }
 }

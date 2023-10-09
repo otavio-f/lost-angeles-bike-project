@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 
 import static br.otaviof.transformations.Util.filterColumn;
 
+/***
+ * Second transformation, filters by stations located on Pasadena
+ */
 public class Second implements Transformation {
     private final TabulatedDataSource bikeSource;
     private final TabulatedDataSource stationSource;
